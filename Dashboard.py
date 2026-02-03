@@ -1,5 +1,4 @@
 import streamlit as st
-import base64
 from PIL import Image
 import io
 
@@ -23,7 +22,7 @@ st.markdown("""
     /* Titre néon */
     .neon-title {
         text-align: center;
-        font-size: 3.5em;
+        font-size: 3em;
         font-weight: bold;
         text-shadow: 
             0 0 10px #00ffff,
@@ -47,51 +46,54 @@ st.markdown("""
     }
     
     /* Container principal */
-    .st-emotion-cache-1r6slb0 {
+    .main-container {
         background-color: rgba(0, 20, 40, 0.7);
         border: 2px solid #00ffff;
         border-radius: 15px;
         box-shadow: 
             0 0 15px #00ffff,
             inset 0 0 15px #00ffff;
-        padding: 2em;
-        margin: 1em 0;
+        padding: 1.5em;
+        margin: 1em auto;
+        max-width: 1200px;
     }
     
-    /* Boutons de jeu - Nouveau style pour 6 jeux */
+    /* Boutons de jeu - Adaptation pour 8 jeux */
     .game-button-container {
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 10px;
-        margin: 20px 0;
+        gap: 6px;
+        margin: 12px 0;
     }
     
     .game-button {
         background: rgba(0, 60, 100, 0.5);
         color: #00ffff !important;
         border: 2px solid #00ffff !important;
-        border-radius: 30px !important;
-        padding: 10px 15px !important;
-        margin: 5px;
+        border-radius: 22px !important;
+        padding: 7px 10px !important;
+        margin: 2px;
         font-weight: bold;
-        font-size: 0.9em;
-        box-shadow: 0 0 8px #00ffff;
+        font-size: 0.8em;
+        box-shadow: 0 0 5px #00ffff;
         transition: all 0.3s;
         white-space: nowrap;
-        min-width: 120px;
+        min-width: 100px;
+        flex: 1 0 auto;
+        max-width: 140px;
     }
     
     .game-button:hover {
         background: #00ffff !important;
         color: #0a0a1a !important;
-        box-shadow: 0 0 15px #00ffff;
+        box-shadow: 0 0 10px #00ffff;
     }
     
     .game-button-active {
         background: #00ffff !important;
         color: #0a0a1a !important;
-        box-shadow: 0 0 15px #00ffff;
+        box-shadow: 0 0 10px #00ffff;
     }
     
     /* Boutons glow */
@@ -99,74 +101,80 @@ st.markdown("""
         background: transparent;
         color: #00ffff;
         border: 2px solid #00ffff;
-        border-radius: 30px;
-        padding: 10px 25px;
-        margin: 10px;
+        border-radius: 22px;
+        padding: 7px 18px;
+        margin: 6px;
         font-weight: bold;
+        font-size: 0.85em;
         text-transform: uppercase;
         cursor: pointer;
         transition: all 0.3s;
-        box-shadow: 0 0 10px #00ffff;
+        box-shadow: 0 0 7px #00ffff;
     }
     
     .glow-button:hover {
         background: #00ffff;
         color: #0a0a1a;
-        box-shadow: 0 0 20px #00ffff, 0 0 30px #0088ff;
+        box-shadow: 0 0 12px #00ffff, 0 0 20px #0088ff;
     }
     
     /* Contrôles */
     .controls-container {
         background-color: rgba(0, 40, 60, 0.6);
-        padding: 20px;
-        border-radius: 10px;
+        padding: 12px;
+        border-radius: 7px;
         border: 1px solid #00ffff;
-        margin: 20px 0;
+        margin: 12px 0;
     }
     
     /* Titre du jeu */
     .game-title {
         text-align: center;
-        font-size: 2em;
+        font-size: 1.7em;
         font-weight: bold;
-        text-shadow: 0 0 10px #00ffff;
-        margin: 1em 0;
+        text-shadow: 0 0 7px #00ffff;
+        margin: 0.7em 0;
     }
     
     .game-subtitle {
         text-align: center;
         color: #0088ff;
-        margin-bottom: 2em;
+        margin-bottom: 1.3em;
+        font-size: 0.9em;
     }
     
     /* Iframe container */
     .iframe-container {
         border: 3px solid #00ffff;
-        box-shadow: 0 0 20px #0088ff;
-        border-radius: 10px;
+        box-shadow: 0 0 12px #0088ff;
+        border-radius: 7px;
         overflow: hidden;
-        margin: 20px 0;
-        height: 600px;
+        margin: 12px 0;
+        height: 500px;
         background-color: #000;
     }
     
     /* Footer */
     .footer {
         text-align: center;
-        margin-top: 2em;
+        margin-top: 1.3em;
         color: #0088ff;
-        font-size: 0.9em;
+        font-size: 0.75em;
+        padding-top: 12px;
+        border-top: 1px solid #0088ff;
     }
     
     /* Style pour les listes */
     ul {
         list-style-type: none;
         padding-left: 0;
+        margin: 8px 0;
     }
     
     li {
-        padding: 5px 0;
+        padding: 3px 0;
         color: #00ffff;
+        font-size: 0.85em;
     }
     
     strong {
@@ -176,18 +184,55 @@ st.markdown("""
     /* Badge console */
     .console-badge {
         display: inline-block;
-        background: rgba(255, 0, 255, 0.3);
-        color: #ff00ff;
-        padding: 3px 8px;
-        border-radius: 12px;
-        font-size: 0.8em;
-        margin-left: 10px;
-        border: 1px solid #ff00ff;
+        background: rgba(0, 255, 255, 0.3);
+        color: #00ffff;
+        padding: 2px 6px;
+        border-radius: 10px;
+        font-size: 0.65em;
+        margin-left: 8px;
+        border: 1px solid #00ffff;
+        vertical-align: middle;
+    }
+    
+    /* Badge arcade spécial */
+    .arcade-badge {
+        display: inline-block;
+        background: rgba(255, 215, 0, 0.3);
+        color: #ffd700;
+        padding: 2px 6px;
+        border-radius: 10px;
+        font-size: 0.65em;
+        margin-left: 8px;
+        border: 1px solid #ffd700;
+        vertical-align: middle;
+        animation: gold-pulse 2s infinite;
+    }
+    
+    @keyframes gold-pulse {
+        0%, 100% { opacity: 0.7; }
+        50% { opacity: 1; }
+    }
+    
+    /* Amélioration responsive */
+    @media (max-width: 768px) {
+        .game-button {
+            min-width: 85px;
+            font-size: 0.7em;
+            padding: 5px 7px !important;
+        }
+        
+        .iframe-container {
+            height: 380px;
+        }
+        
+        .neon-title {
+            font-size: 2.3em;
+        }
     }
 </style>
 """, unsafe_allow_html=True)
 
-# Données des jeux (6 jeux maintenant)
+# Données des jeux (8 jeux maintenant)
 GAMES = {
     "fifa97": {
         "name": "FIFA 97 GOLD EDITION",
@@ -195,6 +240,7 @@ GAMES = {
         "url": "https://www.retrogames.cc/embed/19637-fifa-97-gold-edition-europe-en-fr-de-es-it-sv.html",
         "console": "SNES",
         "color": "#00ff00",
+        "icon": "⚽",
         "controls": [
             "**Flèches :** Déplacement",
             "**X :** Tir / Passe courte",
@@ -211,6 +257,7 @@ GAMES = {
         "url": "https://www.retrogames.cc/embed/28482-lhx-attack-chopper-usa-europe.html",
         "console": "MegaDrive",
         "color": "#ff6600",
+        "icon": "🚁",
         "controls": [
             "**Flèches :** Direction",
             "**A :** Tir principal",
@@ -226,6 +273,7 @@ GAMES = {
         "url": "https://www.retrogames.cc/embed/41508-road-rash-3d.html",
         "console": "PlayStation",
         "color": "#ff0000",
+        "icon": "🏍️",
         "controls": [
             "**Flèches :** Direction",
             "**A :** Accélérer",
@@ -242,6 +290,7 @@ GAMES = {
         "url": "https://www.retrogames.cc/embed/41925-rayman-2-the-great-escape.html",
         "console": "PlayStation",
         "color": "#ffff00",
+        "icon": "👻",
         "controls": [
             "**Flèches :** Déplacement",
             "**A :** Sauter",
@@ -258,6 +307,7 @@ GAMES = {
         "url": "https://www.retrogames.cc/embed/41861-racing-lagoon.html",
         "console": "PlayStation",
         "color": "#00ffff",
+        "icon": "🏎️",
         "controls": [
             "**Flèches :** Direction",
             "**X :** Accélérer",
@@ -274,6 +324,7 @@ GAMES = {
         "url": "https://www.retrogames.cc/embed/43877-rally-challenge-2000-usa.html",
         "console": "Nintendo 64",
         "color": "#ff00ff",
+        "icon": "🏁",
         "controls": [
             "**Joystick :** Direction",
             "**A :** Accélérer",
@@ -284,103 +335,145 @@ GAMES = {
             "**Start :** Pause/Menu",
             "**C-boutons :** Changement de vue"
         ]
+    },
+    "nfscarbon": {
+        "name": "NEED FOR SPEED CARBON",
+        "subtitle": "Own the City (Europe) (En,Fr,De,Es,It)",
+        "url": "https://www.retrogames.cc/embed/43878-need-for-speed-carbon-own-the-city-europe-en-fr-de-es-it.html",
+        "console": "Nintendo DS",
+        "color": "#ff3300",
+        "icon": "🚗",
+        "controls": [
+            "**Stylet/Flèches :** Direction",
+            "**A :** Accélérer",
+            "**B :** Frein/Dérive",
+            "**X :** Nitro (boost)",
+            "**Y :** Changement de vue",
+            "**L :** Regarder derrière",
+            "**R :** Frein à main",
+            "**Start :** Pause/Menu",
+            "**Select :** Carte/Radar",
+            "**Écran tactile :** Menu/Gestion équipe"
+        ]
+    },
+    "streethoop": {
+        "name": "STREET HOOP",
+        "subtitle": "Street Slam / Dunk Dream (Arcade)",
+        "url": "https://www.retrogames.cc/embed/43879-street-hoop-street-slam-dunk-dream-dem-004-deh-004.html",
+        "console": "ARCADE",
+        "color": "#ffd700",
+        "icon": "🏀",
+        "controls": [
+            "**Joystick :** Déplacement joueur",
+            "**Bouton 1 :** Passe/Tir normal",
+            "**Bouton 2 :** Saut/Dunk",
+            "**Bouton 3 :** Tir spécial",
+            "**Start :** Insérer pièce/Démarrer",
+            "**Select :** Choix équipe/Options",
+            "**Combinaisons :** Alley-oop spécial"
+        ]
     }
 }
 
 # Initialisation de l'état
 if 'selected_game' not in st.session_state:
-    st.session_state.selected_game = 'fifa97'
+    st.session_state.selected_game = 'streethoop'
 
 def change_game(game_id):
     st.session_state.selected_game = game_id
 
 # Interface principale
+st.markdown('<div class="main-container">', unsafe_allow_html=True)
 st.markdown('<h1 class="neon-title">ÉMULATEUR NÉON</h1>', unsafe_allow_html=True)
 
-# Sélecteur de jeu avec 6 boutons (2 lignes de 3)
+# Sélecteur de jeu avec 8 boutons (2 lignes de 4)
 st.markdown('<div class="game-button-container">', unsafe_allow_html=True)
 
-# Première ligne : 3 jeux
-col1, col2, col3 = st.columns(3)
+# Première ligne : 4 jeux
+col1, col2, col3, col4 = st.columns(4)
 game_ids = list(GAMES.keys())
 
+# Ligne 1
 with col1:
     game_id = game_ids[0]
     game = GAMES[game_id]
     is_active = st.session_state.selected_game == game_id
-    if st.button(
-        f"⚽ {game['name'].split()[0]}",
-        key=f"btn_{game_id}",
-        use_container_width=True,
-        type="primary" if is_active else "secondary"
-    ):
+    btn_label = f"{game['icon']} {game['name'].split()[0][:6]}"
+    if st.button(btn_label, key=f"btn_{game_id}", use_container_width=True,
+                type="primary" if is_active else "secondary"):
         change_game(game_id)
 
 with col2:
     game_id = game_ids[1]
     game = GAMES[game_id]
     is_active = st.session_state.selected_game == game_id
-    if st.button(
-        f"🚁 {game['name'].split()[0]}",
-        key=f"btn_{game_id}",
-        use_container_width=True,
-        type="primary" if is_active else "secondary"
-    ):
+    btn_label = f"{game['icon']} {game['name'].split()[0]}"
+    if len(game['name'].split()[0]) > 6:
+        btn_label = f"{game['icon']} {game['name'].split()[0][:6]}."
+    if st.button(btn_label, key=f"btn_{game_id}", use_container_width=True,
+                type="primary" if is_active else "secondary"):
         change_game(game_id)
 
 with col3:
     game_id = game_ids[2]
     game = GAMES[game_id]
     is_active = st.session_state.selected_game == game_id
-    if st.button(
-        f"🏍️ {game['name'].split()[0]}",
-        key=f"btn_{game_id}",
-        use_container_width=True,
-        type="primary" if is_active else "secondary"
-    ):
+    btn_label = f"{game['icon']} {game['name'].split()[0][:6]}"
+    if st.button(btn_label, key=f"btn_{game_id}", use_container_width=True,
+                type="primary" if is_active else "secondary"):
         change_game(game_id)
-
-st.markdown('</div>', unsafe_allow_html=True)
-
-# Deuxième ligne : 3 autres jeux
-st.markdown('<div class="game-button-container">', unsafe_allow_html=True)
-
-col4, col5, col6 = st.columns(3)
 
 with col4:
     game_id = game_ids[3]
     game = GAMES[game_id]
     is_active = st.session_state.selected_game == game_id
-    if st.button(
-        f"👻 {game['name'].split()[0]}",
-        key=f"btn_{game_id}",
-        use_container_width=True,
-        type="primary" if is_active else "secondary"
-    ):
+    btn_label = f"{game['icon']} {game['name'].split()[0]}"
+    if st.button(btn_label, key=f"btn_{game_id}", use_container_width=True,
+                type="primary" if is_active else "secondary"):
         change_game(game_id)
 
+st.markdown('</div>', unsafe_allow_html=True)
+
+# Deuxième ligne : 4 autres jeux
+st.markdown('<div class="game-button-container">', unsafe_allow_html=True)
+
+col5, col6, col7, col8 = st.columns(4)
+
+# Ligne 2
 with col5:
     game_id = game_ids[4]
     game = GAMES[game_id]
     is_active = st.session_state.selected_game == game_id
-    if st.button(
-        f"🏎️ {game['name'].split()[0]}",
-        key=f"btn_{game_id}",
-        use_container_width=True,
-        type="primary" if is_active else "secondary"
-    ):
+    btn_label = f"{game['icon']} {game['name'].split()[0][:6]}"
+    if st.button(btn_label, key=f"btn_{game_id}", use_container_width=True,
+                type="primary" if is_active else "secondary"):
         change_game(game_id)
 
 with col6:
     game_id = game_ids[5]
     game = GAMES[game_id]
     is_active = st.session_state.selected_game == game_id
-    if st.button(
-        f"🏁 {game['name'].split()[0]}",
-        key=f"btn_{game_id}",
-        use_container_width=True,
-        type="primary" if is_active else "secondary"
-    ):
+    btn_label = f"{game['icon']} {game['name'].split()[0][:6]}"
+    if st.button(btn_label, key=f"btn_{game_id}", use_container_width=True,
+                type="primary" if is_active else "secondary"):
+        change_game(game_id)
+
+with col7:
+    game_id = game_ids[6]
+    game = GAMES[game_id]
+    is_active = st.session_state.selected_game == game_id
+    btn_label = f"{game['icon']} {game['name'].split()[0][:6]}"
+    if st.button(btn_label, key=f"btn_{game_id}", use_container_width=True,
+                type="primary" if is_active else "secondary"):
+        change_game(game_id)
+
+with col8:
+    game_id = game_ids[7]
+    game = GAMES[game_id]
+    is_active = st.session_state.selected_game == game_id
+    btn_label = f"{game['icon']} {game['name'].split()[0][:6]}"
+    if st.button(btn_label, key=f"btn_{game_id}", use_container_width=True,
+                type="primary" if is_active else "secondary"):
         change_game(game_id)
 
 st.markdown('</div>', unsafe_allow_html=True)
@@ -388,11 +481,16 @@ st.markdown('</div>', unsafe_allow_html=True)
 # Affichage du jeu sélectionné
 game = GAMES[st.session_state.selected_game]
 
-# Affichage du titre avec badge console
+# Affichage du titre avec badge spécial pour Arcade
+if game["console"] == "ARCADE":
+    badge_class = "arcade-badge"
+else:
+    badge_class = "console-badge"
+
 st.markdown(f'''
     <h2 class="game-title">
-        {game["name"]}
-        <span class="console-badge" style="border-color: {game['color']}; color: {game['color']};">
+        {game["icon"]} {game["name"]}
+        <span class="{badge_class}" style="border-color: {game['color']}; color: {game['color']};">
             {game["console"]}
         </span>
     </h2>
@@ -405,12 +503,13 @@ st.markdown(f'''
     <iframe 
         src="{game['url']}"
         width="100%"
-        height="600"
+        height="500"
         frameborder="no"
         allowfullscreen="true"
         webkitallowfullscreen="true"
         mozallowfullscreen="true"
-        title="{game['name']} - Émulateur">
+        title="{game['name']} - Émulateur"
+        sandbox="allow-scripts allow-same-origin allow-popups">
     </iframe>
 </div>
 ''', unsafe_allow_html=True)
@@ -418,7 +517,7 @@ st.markdown(f'''
 # Section des commandes
 st.markdown('<div class="controls-container">', unsafe_allow_html=True)
 st.markdown(f'''
-<h3 style="color:{game['color']}; text-shadow: 0 0 10px {game['color']};">
+<h3 style="color:{game['color']}; text-shadow: 0 0 7px {game['color']};">
     🎮 COMMANDES {game["console"]} :
 </h3>
 ''', unsafe_allow_html=True)
@@ -433,131 +532,191 @@ st.markdown('<div style="text-align: center;">', unsafe_allow_html=True)
 col1, col2, col3 = st.columns(3)
 
 with col1:
-    if st.button("💾 SAUVEGARDE", use_container_width=True):
-        st.info(f"Pour sauvegarder : Utilisez le menu de l'émulateur {game['console']} (icône disquette)")
+    if st.button("💾 SAUVEGARDE", use_container_width=True, 
+                help="Sauvegarde de progression"):
+        if game["console"] == "ARCADE":
+            st.info("Arcade : Sauvegarde des highscores via menu émulateur")
+        else:
+            st.info(f"Pour {game['console']} : Menu émulateur → icône disquette")
 
 with col2:
-    if st.button("🔄 REDÉMARRER LE JEU", use_container_width=True):
+    if st.button("🔄 REDÉMARRER", use_container_width=True, 
+                help="Redémarre le jeu actuel"):
         st.rerun()
 
 with col3:
-    if st.button("⚙️ CONFIGURATION N64", use_container_width=True) and st.session_state.selected_game == "rally":
-        st.info("""
-        Configuration recommandée pour N64 :
-        - Plugin graphique : GLideN64
-        - Résolution : 640x480
-        - Filtre texture : Bilinéaire
-        - FPS : 60 (VSync activé)
-        """)
+    if st.button("🎛️ CONFIGURER", use_container_width=True, 
+                help="Configuration émulateur"):
+        if game["console"] == "ARCADE":
+            st.info("""
+            **Configuration Arcade recommandée :**
+            • Contrôles : Joystick + 3 boutons
+            • Difficulté : Réglable dans le jeu
+            • Pièces illimitées : Option émulateur
+            • Affichage : Ratio 4:3 pour aspect original
+            """)
+        else:
+            st.info("Configurations disponibles dans le menu intégré de l'émulateur.")
 
 st.markdown('</div>', unsafe_allow_html=True)
 
-# Section informations spécifiques pour Rally Challenge 2000
-if st.session_state.selected_game == "rally":
-    with st.expander("🏁 **INFORMATIONS RALLY CHALLENGE 2000**", expanded=False):
+# Section informations spécifiques pour Street Hoop
+if st.session_state.selected_game == "streethoop":
+    with st.expander("🏀 **INFORMATIONS STREET HOOP**", expanded=False):
         st.markdown("""
         ### À propos du jeu :
-        **Rally Challenge 2000** est un jeu de course de rallye sorti sur Nintendo 64 en 1999.
+        **Street Hoop** (aussi connu sous **Street Slam** ou **Dunk Dream**) est un jeu de basket arcade sorti en 1994 par Data East.
         
         ### Caractéristiques :
-        - **Développeur** : ATLUS
-        - **Éditeur** : ATLUS
-        - **Sortie** : 1999
-        - **Genre** : Course de rallye
+        - **Développeur** : Data East
+        - **Éditeur** : Data East
+        - **Sortie** : 1994
+        - **Genre** : Basket arcade / Street
+        - **PCB** : DEM-004 / DEH-004
         
-        ### Circuits disponibles :
-        1. **Forest Path** - Forêt
-        2. **Desert Road** - Désert  
-        3. **Mountain Pass** - Montagne
-        4. **Snow Trail** - Neige
-        5. **City Streets** - Ville
+        ### Particularités Arcade :
+        • **Gameplay arcade** : Simple, rapide et addictif
+        • **Graphismes** : Style cartoon années 90
+        • **Joueurs** : Jusqu'à 4 joueurs (2vs2)
+        • **Système de pièces** : Authentique expérience salle d'arcade
         
-        ### Voitures :
-        - Subaru Impreza WRC
-        - Mitsubishi Lancer Evolution
-        - Toyota Corolla WRC
-        - Ford Focus WRC
+        ### Équipes et personnages :
+        1. **Équipe USA** : Style street agressif
+        2. **Équipe Europe** : Jeu technique
+        3. **Équipe Japon** : Rapidité et précision
+        4. **Équipe Monde** : Mix des styles
         
-        ### Conseils de jeu :
-        - Utilisez le frein à main (L) pour les virages serrés
-        - Changez de vue avec les C-boutons pour meilleure visibilité
-        - Anticipez les virages, les rallys sont techniques !
+        ### Gameplay :
+        - **Dunks spectaculaires** : Animations spéciales
+        - **Alley-oops** : Combinaisons à 2 joueurs
+        - **Power-ups** : Boosts temporaires
+        - **Mode tournoi** : Championnat international
+        
+        ### Conseils pour émulation Arcade :
+        • Activez les **pièces illimitées** pour pratiquer
+        • Réglez la **difficulté** selon votre niveau
+        • **Joystick recommandé** pour mouvements fluides
+        • Expérience **2 joueurs** disponible (partage écran)
         """)
 
 # Section informations générales
 with st.expander("ℹ️ **INFORMATIONS IMPORTANTES**", expanded=False):
     st.markdown("""
     ### Instructions d'utilisation :
-    1. Cliquez sur l'iframe pour activer les commandes
-    2. Utilisez les touches indiquées ci-dessus
-    3. Pour sauvegarder : Menu de l'émulateur (icône disquette)
-    4. Pour redémarrer : Bouton "REDÉMARRER" ou F5
+    1. **Cliquez sur l'iframe** pour activer les commandes
+    2. **Pour Arcade** : Appuyez sur START pour insérer une pièce
+    3. **Contrôles** : Adaptés à chaque type de console
+    4. **Sauvegarde** : Menu émulateur → icône disquette
     
-    ### Compatibilité :
-    - Tous les jeux fonctionnent directement dans le navigateur
-    - Supporte les manettes USB/Bluetooth
-    - Fonctionne sur PC, tablette et mobile
+    ### Compatibilité multi-consoles :
+    - **SNES/MegaDrive** : Compatibilité optimale
+    - **PlayStation** : Bonne performance
+    - **Nintendo 64/DS** : Chrome/Firefox recommandés
+    - **Arcade** : Support MAME optimal
     
-    ### Notes techniques :
-    - Les sauvegardes sont stockées localement
-    - La performance dépend de votre connexion internet
-    - Pour N64 : Utilisez Chrome/Firefox pour meilleure compatibilité
+    ### Performance :
+    - Les jeux Arcade sont généralement légers
+    - Connexion internet stable recommandée
+    - Plein écran disponible via l'émulateur
+    - Son stéréo pour une expérience immersive
     """)
 
+st.markdown('</div>', unsafe_allow_html=True)
+
 # Footer
-st.markdown('<div class="footer">', unsafe_allow_html=True)
-st.markdown("""
-<div style="border-top: 1px solid #0088ff; padding-top: 20px; margin-top: 30px;">
+st.markdown('''
+<div class="footer">
     <p>Émulateur fourni par RetroGames.cc | Design Néon © 2024</p>
-    <p style="font-size: 0.8em; color: #00aaff;">
-        🎮 6 jeux disponibles • 📺 4 consoles supportées • ⚡ Expérience optimisée
+    <p style="font-size: 0.7em; color: #00aaff;">
+        🎮 8 jeux disponibles • 📺 6 types supportés • ⚡ Expérience optimisée
     </p>
 </div>
-""", unsafe_allow_html=True)
+''', unsafe_allow_html=True)
 
 # Sidebar avec statistiques
 with st.sidebar:
-    st.markdown("### 📊 STATISTIQUES")
+    st.markdown("### 📊 TABLEAU DE BORD")
     
-    # Compteur par console
-    consoles = {}
+    # Compteur par type de console
+    console_types = {}
     for game in GAMES.values():
         console = game["console"]
-        consoles[console] = consoles.get(console, 0) + 1
+        console_types[console] = console_types.get(console, 0) + 1
     
-    st.metric("Jeux disponibles", len(GAMES))
-    st.metric("Console actuelle", game["console"])
+    # Métriques
+    st.metric("Total des jeux", len(GAMES))
+    st.metric("Types supportés", len(console_types))
+    
+    # Distribution par type
+    st.markdown("---")
+    st.markdown("### 🎯 RÉPARTITION")
+    for console, count in console_types.items():
+        percentage = (count / len(GAMES)) * 100
+        st.write(f"**{console}** : {count} jeu{'s' if count > 1 else ''}")
+        st.progress(percentage/100, text=f"{percentage:.1f}%")
     
     st.markdown("---")
-    st.markdown("### 🎮 RÉPARTITION PAR CONSOLE")
-    for console, count in consoles.items():
-        st.progress(count/len(GAMES), text=f"{console}: {count} jeu{'s' if count > 1 else ''}")
+    st.markdown("### 🚀 NAVIGATION RAPIDE")
     
-    st.markdown("---")
-    st.markdown("### 🚀 CONTRÔLES RAPIDES")
-    
+    # Boutons de navigation avec icônes
     for game_id, game_info in GAMES.items():
-        icon = "🏁" if game_id == "rally" else "🎮"
-        if st.button(f"{icon} {game_info['name'].split()[0]}", 
-                    key=f"sidebar_{game_id}", 
-                    use_container_width=True, 
-                    type="primary" if st.session_state.selected_game == game_id else "secondary"):
+        if st.button(
+            f"{game_info['icon']} {game_info['name'].split()[0]}", 
+            key=f"sidebar_{game_id}",
+            use_container_width=True,
+            type="primary" if st.session_state.selected_game == game_id else "secondary"
+        ):
             change_game(game_id)
     
     st.markdown("---")
-    st.markdown("### ⚙️ CONFIGURATION")
+    st.markdown("### ⚙️ PARAMÈTRES ARCADE")
     
-    volume = st.slider("Volume", 0, 100, 80)
-    st.session_state.volume = volume
-    
-    quality_options = {
-        "Haute": "Haute qualité graphique",
-        "Moyenne": "Équilibre performance/qualité", 
-        "Basse": "Performance maximale"
-    }
-    
-    quality = st.selectbox("Qualité graphique", list(quality_options.keys()))
-    st.caption(quality_options[quality])
-    
-    if st.button("Appliquer les paramètres", use_container_width=True):
-        st.success(f"✅ Paramètres appliqués ! (Volume: {volume}%, Qualité: {quality})")
+    # Paramètres spécifiques Arcade
+    if st.session_state.selected_game == "streethoop":
+        st.markdown("**Options Street Hoop :**")
+        
+        col_a, col_b = st.columns(2)
+        with col_a:
+            coins = st.selectbox("Pièces", ["Illimitées", "3 par crédit", "Arcade réel"])
+        
+        with col_b:
+            difficulty = st.select_slider(
+                "Difficulté",
+                options=["Très Facile", "Facile", "Normal", "Difficile", "Expert"]
+            )
+        
+        if st.button("⚙️ Appliquer paramètres Arcade", use_container_width=True):
+            st.success(f"✅ Pièces: {coins} | Difficulté: {difficulty}")
+    else:
+        # Paramètres généraux
+        col_a, col_b = st.columns(2)
+        with col_a:
+            volume = st.slider("🔊", 0, 100, 80, key="volume_slider")
+        
+        with col_b:
+            quality = st.selectbox(
+                "🎨", 
+                ["Haute", "Moyenne", "Basse"],
+                index=0,
+                key="quality_select"
+            )
+        
+        if st.button("🔄 Appliquer paramètres", use_container_width=True):
+            st.success(f"✅ Volume: {volume}% | Qualité: {quality}")
+
+# Note de fin spéciale pour Arcade
+st.markdown('''
+<style>
+.arcade-tip {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.75em;
+    color: #ffd700;
+    font-style: italic;
+    text-shadow: 0 0 5px #ffd700;
+}
+</style>
+<div class="arcade-tip">
+    🏀 Astuce Street Hoop : Pour un alley-oop, appuyez sur BOUTON 2 près du panier avec un coéquipier libre !
+</div>
+''', unsafe_allow_html=True)
